@@ -6,9 +6,9 @@
 //   logout = `http://localhost:8080/api/auth/logout`,
 // }
 export enum API {
-  base = 'https://online-chat.fly.dev/api',
-  getPosts = `https://online-chat.fly.dev/api/posts`,
-  signUp = `https://online-chat.fly.dev/api/auth/register`,
-  login = `https://online-chat.fly.dev/api/auth/login`,
-  logout = `https://online-chat.fly.dev/api/auth/logout`,
+  base = 'https://online-bender-chat.fly.dev/api',
+  getPosts = `https://online-bender-chat.fly.dev/api/posts`,
+  signUp = `https://online-bender-chat.fly.dev/api/auth/register`,
+  login = `https://online-bender-chat.fly.dev/api/auth/login`,
+  logout = `https://online-bender-chat.fly.dev/api/auth/logout`,
 }
