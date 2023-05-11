@@ -1,0 +1,14 @@
+$text-color: #272424;
+$bg-light-color: #F1F3F2;
+$bg-dark-color: #C2D3Da;
+$main-color: #81A3A7;
+$disable-color: #83867d;
+$error-color: #F092A5;
+$hover-color: #5C868D;
+$active-color: #118C8B;
+$like-color: #F46A4E;
+
+%element {
+  content: '';
+  position: absolute;
+}

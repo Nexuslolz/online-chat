@@ -1,0 +1,14 @@
+.friendItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2em 1em;
+  border: 1px solid #333;
+  margin-bottom: 2em;
+  max-width: 750px;
+}
+
+.friendItem__imgWrapper {
+  min-width: 150px;
+  min-height: 150px;
+}

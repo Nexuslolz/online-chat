@@ -1,0 +1,81 @@
+@import '../../../styles/variables.scss';
+
+.post {
+  background-color: white;
+  margin-bottom: 1em;
+  width: 40vw;
+  max-width: 750px;
+  height: max-content;
+  align-items: flex-start;
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px $bg-dark-color;
+  transition: 0.2s;
+
+  &:hover {
+    box-shadow: 0 0 20px 2px $bg-dark-color;
+  }
+}
+
+.postHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5em;
+  margin-bottom: 2em;
+}
+
+.postHeader__authorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.postBody__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.postFooter__likes {
+  margin-top: 3em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.25em;
+}
+
+.postFooter__likesImg {
+  width: 40px;
+  height: 40px;
+  transition: 0.1s;
+
+  * {
+    fill: $like-color;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transition: 0.1s;
+
+    &:hover {
+      fill: $error-color;
+    }
+
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.postFooter__likesWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

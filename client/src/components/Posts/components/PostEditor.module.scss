@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.postEditor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postEditor__wrapper {
+  padding: 2em 2em;
+  background-color: $bg-dark-color;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px $bg-dark-color;
+}
+
+.postEditor__text {
+  border-radius: 10px;
+  border: none;
+  padding: 1em 2em;
+  box-shadow: 0 0 10px 2px $bg-dark-color;
+  outline: none;
+  transition: 0.2s;
+  resize: none;
+
+  &:focus {
+    box-shadow: 0 0 35px 3px $main-color;
+  }
+}

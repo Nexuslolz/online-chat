@@ -1,0 +1,31 @@
+.postEditor__inputWrapper {
+  position: relative;
+}
+
+.postEditor__input {
+  visibility: hidden;
+}
+
+.postEditor__label{
+  position: absolute;
+  content: '';
+  transition: 0.2s;
+  top: 50%;
+  left: 0;
+
+    &::before {
+    position: absolute;
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-image: url('../../assets/Skrepkkasvg.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: scaleX(1.1)
+  }
+}

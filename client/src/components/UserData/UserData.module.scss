@@ -1,0 +1,72 @@
+@import '../../styles/variables.scss';
+
+.userData__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userData__field {
+  margin-bottom: 2em;
+  textarea,
+  p {
+    border-radius: 10px;
+    border: none;
+    padding: 1em 2em;
+    box-shadow: 0 0 10px 2px $bg-dark-color;
+    outline: none;
+    transition: 0.2s;
+    resize: none;
+    width: 426px;
+    height: 148px;
+    background-color: white;
+    margin: 0 auto;
+    font-size: 16px;
+    overflow-y: auto;
+
+    &:focus {
+      box-shadow: 0 0 35px 3px $main-color;
+    }
+  }
+}
+
+.userData__header{
+  margin-bottom: 0.5em;
+  z-index: 5;
+}
+
+.userData__headerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 2em;
+  gap: 2em;
+}
+
+.userData__imgWrapper {
+  max-width: 300px;
+  max-height: 300px;
+  min-height: 250px;
+  min-width: 250px;
+}
+
+.userData__img {
+  width: 100%;
+}
+
+.myPage__posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+}

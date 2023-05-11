@@ -1,0 +1,46 @@
+@import '../../../../styles/variables.scss';
+
+.headerLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  color: $text-color;
+  text-transform: uppercase;
+
+  &:hover {
+    .headerLogo__Img {
+      transform: rotate(360deg) scale(1.2);
+    }
+    .headerLogo__header {
+      text-shadow: 0 0 10px $hover-color;
+      transform: scale(1.1) translateX(8px);
+  }
+}
+}
+
+.headerLogo__Img {
+  background-image: url('../../../../assets/logo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 6vw;
+  height: 100px;
+  max-width: 100px;
+  transition: 0.25s;
+  min-width: 60px;
+}
+
+.headerLogo__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 100px;
+}
+
+.headerLogo__header {
+  transition: 0.2s;
+  text-shadow: 0 0 3px $hover-color;
+  color: $text-color;
+}
