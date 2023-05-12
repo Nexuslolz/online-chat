@@ -26,12 +26,11 @@ body {
 }
 
 #root {
-  display: grid;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
-  grid-template-rows: 0.2fr 5fr auto;
-  align-items: center;
-  justify-items: stretch;
+  min-height: 100vh;
 }
 
 main {
