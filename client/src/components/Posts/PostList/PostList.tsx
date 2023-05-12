@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './PostList.module.scss';
 
-import { API_params } from '../../../constants/api';
+import { API_params } from '../../../constants/pages';
 import useFetch from '../../../hooks/useFetch';
 import { ILikes } from '../../../types/types';
 import PostsService from '../../API/PostsService';

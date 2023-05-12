@@ -14,3 +14,8 @@ export enum MyPage {
   hobby = 'Хобби',
   save = 'Сохранить',
 }
+
+export enum API_params {
+  skip = 4,
+  limit = 4,
+}
