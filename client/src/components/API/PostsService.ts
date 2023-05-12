@@ -13,8 +13,8 @@ interface ILikesPost {
 }
 
 export default class PostsService {
-  static async getPosts() {
-    return $api.get('/posts');
+  static async getPosts(limit?: number, skip?: number) {
+    return $api.get(`/posts?skip=${skip}&limit=${limit}`);
   }
 
   static async addPosts(body: string) {
