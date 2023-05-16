@@ -12,13 +12,14 @@ import PostsService from '../../API/PostsService';
 import FavouriteBtn from '../../Icons/FavouriteBtn';
 
 interface IPost {
-  image?: File;
+  // image?: File;
   body: string;
   date: Date;
   likes: ILikes[];
   name: string;
   id: string;
   visible: boolean;
+  image: string;
 }
 
 const PostItem: React.FC<IPost> = (props: IPost) => {
@@ -62,7 +63,7 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
   return (
     <div id={props.id} className={styles.post}>
       <div className={styles.postHeader}>
-        <div className={styles.postHeader__authorImg}>user image</div>
+        <div className={styles.postHeader__authorImg}></div>
         <div className={styles.postHeader__authorWrapper}>
           <h2 className={styles.postHeader__authorName}>{props.name}</h2>
           <div className={styles.postHeader__authorTime}></div>
@@ -70,7 +71,11 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
         </div>
       </div>
       <div className={styles.postBody__content}>
-        <div className={styles.postBody__img}> image body</div>
+        {(props.image === undefined || props.image.length > 0) && (
+          <div className={styles.postBody__img}>
+            <img src={props.image} alt='postImage' />
+          </div>
+        )}
         <div className={styles.postBody__text}>{props.body}</div>
       </div>
       <div className={styles.postFooter__likes}>
