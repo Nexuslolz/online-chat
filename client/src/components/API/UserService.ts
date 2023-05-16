@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import $api from './ApiInstance';
+import { $api } from './ApiInstance';
 
 import { IFriendItem, IIndexedStr } from '../../types/types';
 

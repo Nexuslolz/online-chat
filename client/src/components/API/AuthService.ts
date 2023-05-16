@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import { Dispatch } from 'react';
 
-import $api from './ApiInstance';
+import { $api } from './ApiInstance';
 
 import { API } from '../../constants/api';
 import { authSlice } from '../../store/slices/authSlice';

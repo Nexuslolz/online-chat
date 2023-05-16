@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 
-import $api from './ApiInstance';
+import { $api } from './ApiInstance';
 
-import { IAuthResponse, IUserPost } from '../../types/types';
+import { IAuthResponse, IPostData, IUserPost } from '../../types/types';
 
 interface ILikesPost {
   userId: string;
@@ -17,11 +17,11 @@ export default class PostsService {
     return $api.get(`/posts?skip=${skip}&limit=${limit}`);
   }
 
-  static async addPosts(body: string) {
+  static async addPosts(body: IPostData) {
     return $api.post<IAuthResponse>('/posts', { body });
   }
 
-  static async addUserPosts(body: string) {
+  static async addUserPosts(body: IPostData) {
     return $api.put<IAuthResponse>('/users/add-post', { body });
   }
 
@@ -35,5 +35,9 @@ export default class PostsService {
 
   static async getPost(id: string) {
     return $api.get(`/posts/${id}`);
+  }
+
+  static async addFile(file: string) {
+    return $api.put(`/posts/add-file`, { file });
   }
 }
