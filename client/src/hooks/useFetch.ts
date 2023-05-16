@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import { useState } from 'react';
 
 const useFetch = (fetchFn: (id?: string, param?: string) => Promise<void>) => {
@@ -11,7 +10,9 @@ const useFetch = (fetchFn: (id?: string, param?: string) => Promise<void>) => {
       await fetchFn(id, param);
       setError('');
     } catch (err: unknown) {
-      if (err instanceof AxiosError) setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      }
     } finally {
       setIsLoading(false);
     }
