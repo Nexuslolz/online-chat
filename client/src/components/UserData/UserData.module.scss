@@ -39,7 +39,7 @@
 }
 
 .userData__header{
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   z-index: 5;
 }
 
@@ -69,4 +69,101 @@
   align-items: center;
   justify-content: space-around;
   width: 60%;
+}
+
+.userDataField__item {
+  margin-bottom: 6%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    margin-right: 5%;
+  }
+}
+
+
+.userDataField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+
+  &__textArea {
+    border-radius: 10px;
+    border: none;
+    padding: 1em 2em;
+    box-shadow: 0 0 10px 2px $bg-dark-color;
+    outline: none;
+    transition: 0.2s;
+    resize: none;
+    width: 426px;
+    height: 160px;
+    background-color: white;
+    margin: 0 auto;
+    font-size: 16px;
+    overflow-y: auto;
+    margin-bottom: 1.5em;
+
+
+    &:focus {
+      box-shadow: 0 0 35px 3px $main-color;
+    }
+  }
+
+  &__paragraph {
+    border: none;
+    padding: 1em 0.5em;
+    outline: none;
+    transition: 0.2s;
+    width: 426px;
+    background-color: $bg-light-color;
+    margin: 0 auto;
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 1.5em;
+  }
+}
+
+.userDataField__textArea::-webkit-scrollbar {
+  @extend %scrollbar;
+}
+
+.userDataField__textArea::-webkit-scrollbar-thumb {
+  @extend %scrollthumb;
+}
+
+.userData__loaderWrapper {
+  * {
+    max-width: 50px;
+    max-height: 50px;
+    position: absolute;
+    top: -15%;
+  }
+}
+
+.userData__footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10%;
+  position: relative;
+}
+
+.userData__error_hidden {
+  @extend %error-hidden;
+}
+
+.userData__error_visible {
+  @extend %error-visible;
+
 }
