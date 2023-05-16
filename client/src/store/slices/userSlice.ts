@@ -8,10 +8,11 @@ const initialState: IUser = {
   email: '',
   body: {
     about: '',
-    education: '',
-    hobby: '',
+    age: '',
+    city: '',
   },
   posts: [],
+  isError: false,
 };
 
 export const userSlice = createSlice({
@@ -30,6 +31,9 @@ export const userSlice = createSlice({
     },
     createPost(state, action: PayloadAction<IUserPost[]>) {
       state.posts = action.payload;
+    },
+    setUserError(state, action: PayloadAction<boolean>) {
+      state.isError = action.payload;
     },
   },
 });
