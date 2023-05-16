@@ -31,7 +31,7 @@ router.put('/add-post', passport.authenticate('jwt', { session: false }), async 
   const { user } = ctx.state
   const id = user._id
 
-  const newPost = new Post({ body, user: user._id, username: user.name })
+  const newPost = new Post({ body: body.content, image: 'body.image', user: user._id, username: user.name })
   ctx.body = newPost
   ctx.body = await User.findByIdAndUpdate(
     id,
@@ -39,6 +39,7 @@ router.put('/add-post', passport.authenticate('jwt', { session: false }), async 
     { new: true }
   )
   ctx.status = 201
+
 })
 
 router.get('/', passport.authenticate('jwt', { session: false }), async (ctx) => {

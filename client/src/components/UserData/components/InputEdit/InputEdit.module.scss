@@ -1,0 +1,20 @@
+@import '../../../../styles/variables.scss';
+
+.inputEdit__input {
+  border-radius: 5px;
+  border: none;
+  padding: 1em;
+  box-shadow: 0 0 10px 2px $bg-dark-color;
+  outline: none;
+  transition: 0.2s;
+  resize: none;
+  width: 55%;
+  height: max-content;
+  background-color: white;
+  font-size: 16px;
+  overflow-y: auto;
+
+  &:focus {
+    box-shadow: 0 0 35px 3px $main-color;
+  }
+}

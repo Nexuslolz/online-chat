@@ -21,17 +21,22 @@ const UserPostList: React.FC = () => {
 
   return (
     <div className={styles.postWrapper}>
-      {posts.map((post) => (
-        <PostItem
-          visible={false}
-          id={post._id}
-          key={post._id}
-          name={post.username}
-          body={post.body}
-          date={new Date(post.createdDate)}
-          likes={post.likes}
-        />
-      ))}
+      {posts.length > 0 ? (
+        posts.map((post) => (
+          <PostItem
+            visible={false}
+            id={post._id}
+            key={post._id}
+            name={post.username}
+            body={post.body}
+            date={new Date(post.createdDate)}
+            likes={post.likes}
+            image={post.image}
+          />
+        ))
+      ) : (
+        <h1>У вас пока нет новостей</h1>
+      )}
     </div>
   );
 };

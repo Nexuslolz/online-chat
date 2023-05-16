@@ -1,14 +1,15 @@
 const Router = require('koa-router')
 const passport = require('koa-passport')
-
 const Post = require('../models/Post')
+
 const router = new Router().prefix('/posts')
 
 router.post('/', passport.authenticate('jwt', { session: false }), async (ctx) => {
   const { body } = ctx.request.body
   const { user } = ctx.state
 
-  ctx.body = await new Post({ body, user: user._id, username: user.name }).save()
+  ctx.body = await new Post({ body: body.content, image: 'body.image', user: user._id, username: user.name }).save()
+  ctx.body = ctx.request.body
   ctx.status = 201
 }),
 

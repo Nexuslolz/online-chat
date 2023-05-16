@@ -19,8 +19,8 @@ export interface IUseInput {
 
 export interface IUserBody {
   about: string;
-  education: string;
-  hobby: string;
+  age: string;
+  city: string;
 }
 
 export interface IUserPost {
@@ -30,6 +30,7 @@ export interface IUserPost {
   likes: ILikes[];
   createdDate: string;
   _id: string;
+  image: string;
 }
 
 export interface IUser {
@@ -38,6 +39,7 @@ export interface IUser {
   email: string;
   body?: IUserBody;
   posts?: IUserPost[];
+  isError?: boolean;
 }
 
 export interface IAuthResponse {
@@ -54,4 +56,9 @@ export interface IIndexedStr {
 export interface IFriendItem {
   name: string;
   id: string;
+}
+
+export interface IPostData {
+  content: string;
+  image: string;
 }

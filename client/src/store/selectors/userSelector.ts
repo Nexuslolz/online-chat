@@ -19,3 +19,7 @@ export const getBody = (state: RootState) => {
 export const getPosts = (state: RootState) => {
   return state.user.posts;
 };
+
+export const getUserError = (state: RootState) => {
+  return state.user.isError;
+};

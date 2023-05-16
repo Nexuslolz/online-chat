@@ -21,8 +21,8 @@ router.post('/register', async (ctx) => {
   const newUser = await User.create({
     name, email, password: hash, body: {
       about: '',
-      education: '',
-      hobby: ''
+      age: '',
+      city: ''
     },
     posts: []
   })

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './PostList.module.scss';
 
+import { UserError } from '../../../constants/errors';
 import { API_params } from '../../../constants/pages';
 import useFetch from '../../../hooks/useFetch';
 import { ILikes } from '../../../types/types';
@@ -16,6 +17,7 @@ interface IData {
   likes: ILikes[];
   _id: string;
   username: string;
+  image: string;
 }
 
 const PostList: React.FC = () => {
@@ -79,6 +81,7 @@ const PostList: React.FC = () => {
     setIsPaginationLoad(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip]);
+  console.log(posts);
 
   if (isPostsLoading) {
     return (
@@ -100,7 +103,9 @@ const PostList: React.FC = () => {
   return (
     <div className={styles.postWrapper}>
       {postError ? (
-        <h1>Error has occured. {postError}. Try again later.</h1>
+        <h1>
+          {UserError.postListgetErr} {postError}. {UserError.postListTryLater}
+        </h1>
       ) : (
         posts.map((post) => (
           <PostItem
@@ -111,6 +116,7 @@ const PostList: React.FC = () => {
             body={post.body}
             date={new Date(post.createdDate)}
             likes={post.likes}
+            image={post.image}
           />
         ))
       )}

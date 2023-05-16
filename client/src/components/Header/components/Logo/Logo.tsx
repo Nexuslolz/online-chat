@@ -9,7 +9,7 @@ const Logo: React.FC = () => {
       <div className={styles.headerLogo__Img}></div>
       <div className={styles.headerLogo__content}>
         <h1 className={styles.headerLogo__header}>Bender</h1>
-        <h1 className={styles.headerLogo__header}>Chat</h1>
+        <h1 className={styles.headerLogo__header}>Ch4t</h1>
       </div>
     </Link>
   );
