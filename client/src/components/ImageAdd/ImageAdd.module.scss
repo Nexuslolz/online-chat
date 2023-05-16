@@ -1,23 +1,24 @@
 .postEditor__inputWrapper {
   position: relative;
+  min-height: 60px;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .postEditor__input {
-  visibility: hidden;
+  opacity: 0;
 }
 
 .postEditor__label{
-  position: absolute;
+  position: relative;
   content: '';
   transition: 0.2s;
-  top: 50%;
-  left: 0;
 
     &::before {
     position: absolute;
     content: '';
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     background-image: url('../../assets/Skrepkkasvg.svg');
     background-position: center;
     background-repeat: no-repeat;
