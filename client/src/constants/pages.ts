@@ -2,8 +2,8 @@ import { IPages } from '../types/types';
 
 export const pages: IPages[] = [
   { name: 'Моя страница', route: '/mypage' },
-  { name: 'Люди', route: '/friends' },
   { name: 'Мои сообщения', route: '/messages' },
+  { name: 'Люди', route: '/friends' },
   { name: 'Новости', route: '/' },
 ];
 
@@ -13,6 +13,13 @@ export enum MyPage {
   education = 'Образование',
   hobby = 'Хобби',
   save = 'Сохранить',
+  birth = 'Дата рождения',
+  enterBirth = 'Выберите вашу дату рождения...',
+  city = 'Город',
+  enterCity = 'Введите ваш город...',
+  noValue = 'Не указано',
+  age = 'Возраст',
+  years = 'лет',
 }
 
 export enum API_params {
