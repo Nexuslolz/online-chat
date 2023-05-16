@@ -18,11 +18,11 @@ const userSchema = new Schema({
       type: String,
       required: false,
     },
-    education: {
+    age: {
       type: String,
       required: false,
     },
-    hobby: {
+    city: {
       type: String,
       required: false,
     }
@@ -36,6 +36,10 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'users'
+    },
+    image: {
+      type: Buffer,
+      required: false,
     },
     username: {
       type: String,
