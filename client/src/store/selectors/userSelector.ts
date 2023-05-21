@@ -23,3 +23,7 @@ export const getPosts = (state: RootState) => {
 export const getUserError = (state: RootState) => {
   return state.user.isError;
 };
+
+export const getUserFriends = (state: RootState) => {
+  return state.user.friends;
+};

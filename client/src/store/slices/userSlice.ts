@@ -12,6 +12,7 @@ const initialState: IUser = {
     city: '',
   },
   posts: [],
+  friends: [],
   isError: false,
 };
 
@@ -25,12 +26,16 @@ export const userSlice = createSlice({
       state.name = action.payload.name;
       state.body = action.payload.body;
       state.posts = action.payload.posts;
+      state.friends = action.payload.friends;
     },
     updateUser(state, action: PayloadAction<IUserBody>) {
       state.body = action.payload;
     },
     createPost(state, action: PayloadAction<IUserPost[]>) {
       state.posts = action.payload;
+    },
+    addFriend(state, action: PayloadAction<string[]>) {
+      state.friends = action.payload;
     },
     setUserError(state, action: PayloadAction<boolean>) {
       state.isError = action.payload;
