@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNavigate } from 'react-router';
+
 import styles from './PostItem.module.scss';
 
 import { getIsAuth } from '../../../store/selectors/authSelector';
+import { getId } from '../../../store/selectors/userSelector';
 import { authSlice } from '../../../store/slices/authSlice';
 import { ILikes } from '../../../types/types';
 import PostsService from '../../API/PostsService';
@@ -20,12 +23,15 @@ interface IPost {
   id: string;
   visible: boolean;
   image: string;
+  userId?: string;
 }
 
 const PostItem: React.FC<IPost> = (props: IPost) => {
   const [likes, setLikes] = useState<number>(props.likes.length);
   const isAuth = useSelector(getIsAuth);
   const dispatch = useDispatch();
+  const router = useNavigate();
+  const userId = useSelector(getId);
 
   const giveLike = async () => {
     if (!isAuth) {
@@ -39,6 +45,19 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
         const userId = err.response?.data.error;
         return removeLike(userId);
       }
+    }
+  };
+
+  const redirectToProduct = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    if (userId === props.userId) {
+      router(`/mypage`);
+    } else {
+      router(`/friends/${props.userId}`);
     }
   };
 
@@ -62,7 +81,7 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
 
   return (
     <div id={props.id} className={styles.post}>
-      <div className={styles.postHeader}>
+      <div onClick={redirectToProduct} className={styles.postHeader}>
         <div className={styles.postHeader__authorImg}></div>
         <div className={styles.postHeader__authorWrapper}>
           <h2 className={styles.postHeader__authorName}>{props.name}</h2>
@@ -72,9 +91,7 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
       </div>
       <div className={styles.postBody__content}>
         {(props.image === undefined || props.image.length > 0) && (
-          <div className={styles.postBody__img}>
-            <img src={props.image} alt='postImage' />
-          </div>
+          <div className={styles.postBody__img}>{/* <img src={props.image} alt='postImage' /> */}</div>
         )}
         <div className={styles.postBody__text}>{props.body}</div>
       </div>

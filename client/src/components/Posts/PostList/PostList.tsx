@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './PostList.module.scss';
 
 import { UserError } from '../../../constants/errors';
-import { API_params } from '../../../constants/pages';
+import { API_params, NoPosts } from '../../../constants/pages';
 import useFetch from '../../../hooks/useFetch';
 import { ILikes } from '../../../types/types';
 import PostsService from '../../API/PostsService';
@@ -18,6 +18,7 @@ interface IData {
   _id: string;
   username: string;
   image: string;
+  user?: string;
 }
 
 const PostList: React.FC = () => {
@@ -47,7 +48,9 @@ const PostList: React.FC = () => {
     try {
       const allPostsLength = (await PostsService.getPosts()).data.length;
 
-      if (posts?.length! >= allPostsLength) return;
+      if (posts?.length! >= allPostsLength) {
+        throw new Error('Больше нечего подгружать');
+      }
       setPaginationError('');
       setIsPaginationLoad(true);
 
@@ -81,7 +84,6 @@ const PostList: React.FC = () => {
     setIsPaginationLoad(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip]);
-  console.log(posts);
 
   if (isPostsLoading) {
     return (
@@ -95,35 +97,42 @@ const PostList: React.FC = () => {
   if (posts.length === 0) {
     return (
       <div className={styles.postWrapper}>
-        <h1>Новостей пока нет</h1>
+        <h1>{NoPosts.postUserPage}</h1>
+      </div>
+    );
+  }
+
+  if (postError) {
+    return (
+      <div className={styles.postWrapper}>
+        <h1>
+          {UserError.postListgetErr} {postError}. {UserError.postListTryLater}
+        </h1>
       </div>
     );
   }
 
   return (
     <div className={styles.postWrapper}>
-      {postError ? (
-        <h1>
-          {UserError.postListgetErr} {postError}. {UserError.postListTryLater}
-        </h1>
-      ) : (
-        posts.map((post) => (
-          <PostItem
-            visible={true}
-            key={post._id}
-            id={post._id}
-            name={post.username}
-            body={post.body}
-            date={new Date(post.createdDate)}
-            likes={post.likes}
-            image={post.image}
-          />
-        ))
-      )}
+      {posts.map((post) => (
+        <PostItem
+          visible={true}
+          key={post._id}
+          id={post._id}
+          name={post.username}
+          body={post.body}
+          date={new Date(post.createdDate)}
+          likes={post.likes}
+          image={post.image}
+          userId={post.user}
+        />
+      ))}
       <div ref={lastElement} className={styles.observer}></div>
       <div className={styles.paginationParams}>
         {paginationError ? (
-          <span>Error has occured. {paginationError}. Please, try later.</span>
+          <span>
+            {UserError.postListgetErr} {paginationError}. {UserError.userData}
+          </span>
         ) : (
           isPaginationLoad && <Loader />
         )}
