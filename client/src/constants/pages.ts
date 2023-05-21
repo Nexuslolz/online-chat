@@ -26,3 +26,16 @@ export enum API_params {
   skip = 4,
   limit = 4,
 }
+
+export enum PeoplePage {
+  chat = 'Перейти в чат',
+  addFriend = 'Добавить в друзья',
+  removeFriend = 'Удалить из друзей',
+  city = 'Город: ',
+  register = 'Регистрация: ',
+}
+
+export enum NoPosts {
+  postUserPage = 'Новостей пока нет',
+  usersFriendPage = 'Людей пока нет',
+}

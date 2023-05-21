@@ -13,7 +13,7 @@ export enum Validations {
 }
 
 export enum AuthErrorsMessage {
-  invalidFields = 'Invalid form fields',
-  notFound = 'Incorrect login or password!',
-  isExist = 'User with this email is already registered',
+  invalidFields = 'Некорректный ввод',
+  notFound = 'Неправильный логин или пароль!',
+  isExist = 'Пользователь с этим email уже зарегистрирован!',
 }
