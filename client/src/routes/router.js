@@ -1,3 +1,4 @@
+import FriendPage from '../pages/FriendPage/FriendPage';
 import FriendsPage from '../pages/FriendsPage/FriendsPage';
 import MessagePage from '../pages/MessagePage/MessagePage';
 import OwnerPage from '../pages/OwnerPage/OwnerPage';
@@ -22,6 +23,11 @@ export const privateRoutes = [
   {
     path: '/mypage',
     element: <OwnerPage />,
+    exact: true,
+  },
+  {
+    path: '/friends/:_id',
+    element: <FriendPage />,
     exact: true,
   },
 ];
