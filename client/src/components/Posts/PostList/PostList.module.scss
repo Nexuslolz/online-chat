@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .postWrapper {
   margin-top: 4em;
   display: flex;
@@ -11,6 +13,7 @@
   display: flex;
   justify-content: center;
   min-height: 100px;
+  color: $error-color;
 
   * {
     width: 70%;

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
-
-import { getPosts } from '../../../store/selectors/userSelector';
+import { NoPosts } from '../../../constants/pages';
 import { IUserPost } from '../../../types/types';
 import PostItem from '../PostItem/PostItem';
 import styles from '../PostList/PostList.module.scss';
 
-const UserPostList: React.FC = () => {
+interface IPostList {
+  postList: IUserPost[] | [];
+}
+
+const UserPostList: React.FC<IPostList> = (props: IPostList) => {
   const [posts, setPosts] = useState<IUserPost[]>();
 
-  const postList = useSelector(getPosts);
+  // const postList = useSelector(getPosts);
 
   useEffect(() => {
-    const list = postList?.slice().reverse();
+    const list = props.postList?.slice().reverse();
     setPosts(list);
-  }, [postList]);
+  }, [props.postList]);
 
   if (!posts) return null;
 
@@ -35,7 +37,7 @@ const UserPostList: React.FC = () => {
           />
         ))
       ) : (
-        <h1>У вас пока нет новостей</h1>
+        <h1>{NoPosts.postUserPage}</h1>
       )}
     </div>
   );

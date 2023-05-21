@@ -9,7 +9,7 @@ import image from '../../assets/person-avatar-placeholder.png';
 import { UserError } from '../../constants/errors';
 import { MyPage } from '../../constants/pages';
 import useFetch from '../../hooks/useFetch';
-import { getBody, getId, getName } from '../../store/selectors/userSelector';
+import { getBody, getId, getName, getPosts } from '../../store/selectors/userSelector';
 import { userSlice } from '../../store/slices/userSlice';
 import { IIndexedStr } from '../../types/types';
 import { getAge } from '../../utils/getAge';
@@ -33,6 +33,8 @@ const UserData: React.FC = () => {
   const [city, setCity] = useState<string>(userData?.city!);
   const [about, setAbout] = useState<string>(userData?.about!);
   const [error, setError] = useState<boolean>(false);
+
+  const postList = useSelector(getPosts);
 
   let [postData, isDataLoading, dataError] = useFetch(async () => {
     await UserService.editUser(userId, userBody);
@@ -169,7 +171,7 @@ const UserData: React.FC = () => {
       </div>
       <div className={styles.myPage__posts}>
         <PostEditor />
-        <UserPostList />
+        <UserPostList postList={postList!} />
       </div>
     </div>
   );
