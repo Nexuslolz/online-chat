@@ -40,6 +40,7 @@ export interface IUser {
   body?: IUserBody;
   posts?: IUserPost[];
   isError?: boolean;
+  friends: string[];
 }
 
 export interface IAuthResponse {
@@ -55,7 +56,9 @@ export interface IIndexedStr {
 
 export interface IFriendItem {
   name: string;
-  id: string;
+  _id: string;
+  body: { city: string };
+  createdDate: string;
 }
 
 export interface IPostData {
