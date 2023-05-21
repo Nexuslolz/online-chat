@@ -61,6 +61,10 @@ const userSchema = new Schema({
       default: Date.now
     },
   }],
+  friends: [{
+    type: String,
+    required: false
+  }],
   password: {
     type: String,
     required: true,

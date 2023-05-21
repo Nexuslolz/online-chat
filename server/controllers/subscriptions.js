@@ -6,39 +6,71 @@ const Subscription = require('../models/Subscription')
 
 const router = new Router().prefix('/subscriptions')
 
-router.post('/', passport.authenticate('jwt', { session: false }), async (ctx) => {
-  const { profile } = ctx.request.body
+router.put('/add-friend', passport.authenticate('jwt', { session: false }), async (ctx) => {
+  const { friend } = ctx.request.body
   const subscriber = ctx.state.user._id
-  const checkSubscription = await Subscription.findOne({ subscriber, profile })
 
-  if (checkSubscription) {
-    ctx.throw(400, 'You have already subscribed')
-  }
+  const newFriend = await User.findById(friend)
+  const owner = await User.findById(subscriber)
 
-  ctx.body = await new Subscription({ subscriber, profile }).save()
+
+  const user = await User.findByIdAndUpdate(
+    subscriber,
+    { friends: [...owner.friends, friend] },
+    { new: true }
+  )
+
+  const subscribe = await User.findByIdAndUpdate(
+    friend,
+    { friends: [...newFriend.friends, subscriber] },
+    { new: true }
+  )
+
+  ctx.body = { me: user, fr: subscribe }
+
   ctx.status = 201
 })
 
-router.get('/', async (ctx) => {
-  ctx.body = await Subscription.find(ctx.query)
-})
-
 router.get('/all', async (ctx) => {
-  ctx.body = ctx
-  const users = await User.find()
+  const { query } = ctx
+  const { skip, limit } = query
+  delete query.skip
+  delete query.limit
 
-  if (users) {
-    ctx.body = users
-  } else {
-    ctx.throw(404, 'Пользователей пока нет')
-  }
+  const q = 'users' in query ?
+    { user: { $in: query.users.split(',') } } : query
+  ctx.set('x-total-count', await User.count(q))
+  ctx.body = await User
+    .find(q)
+    .sort({ createdDate: - 1 })
+    .skip(+skip)
+    .limit(+limit)
 })
 
-router.delete('/:_id', passport.authenticate('jwt', { session: false }), async (ctx) => {
-  const { _id } = ctx.params
-  const subscriber = ctx.state.user._id
-  await Subscription.findByIdAndDelete({ _id, subscriber })
-  ctx.body = { message: 'You was unsubscribed' }
+router.put('/delete-friend', passport.authenticate('jwt', { session: false }), async (ctx) => {
+  const { friend, subscriber } = ctx.request.body
+
+  const deleteFriend = await User.findById(friend)
+  const owner = await User.findById(subscriber)
+
+  const resultFriend = deleteFriend.friends.filter((item) => item !== subscriber)
+  const resultOwn = owner.friends.filter((item) => item !== friend)
+
+
+  await User.findByIdAndUpdate(
+    subscriber,
+    { friends: resultOwn },
+    { new: true }
+  )
+
+  await User.findByIdAndUpdate(
+    friend,
+    { friends: resultFriend },
+    { new: true }
+  )
+
+  ctx.body = { resultFriend, resultOwn }
+  ctx.status = 201
 })
 
 module.exports = router.routes()

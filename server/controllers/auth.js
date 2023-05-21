@@ -24,6 +24,7 @@ router.post('/register', async (ctx) => {
       age: '',
       city: ''
     },
+    friends: [],
     posts: []
   })
 
@@ -32,7 +33,8 @@ router.post('/register', async (ctx) => {
     name: newUser.name,
     email: newUser.email,
     body: newUser.body,
-    posts: newUser.posts
+    posts: newUser.posts,
+    friends: newUser.friends
   }
 
   const tokens = tokenService.generateToken(payload)
@@ -60,7 +62,8 @@ router.post('/login', async (ctx) => {
     name: user.name,
     email: user.email,
     body: user.body,
-    posts: user.posts
+    posts: user.posts,
+    friends: user.friends
   }
 
   const tokens = tokenService.generateToken(payload)
@@ -103,7 +106,8 @@ router.get('/refresh', async (ctx) => {
     name: user.name,
     email: user.email,
     body: user.body,
-    posts: user.posts
+    posts: user.posts,
+    friends: user.friends
   }
 
   const tokens = tokenService.generateToken(payload)
