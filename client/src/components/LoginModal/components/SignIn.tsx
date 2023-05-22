@@ -3,23 +3,29 @@ import React, { FormEvent, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { useNavigate } from 'react-router';
+
 import styles from './SignModal.module.scss';
 
 import { ModalAuth } from '../../../constants/modalAuth';
 import { Auth } from '../../../constants/titles';
-import { AuthErrorsMessage, Validations } from '../../../constants/validationAuth';
+import { AuthErrorsMessage, AuthFields, Validations } from '../../../constants/validationAuth';
 import { useInput } from '../../../hooks/useInput';
 import { authSlice } from '../../../store/slices/authSlice';
 import { userSlice } from '../../../store/slices/userSlice';
 import AuthService from '../../API/AuthService';
 import Button from '../../Button/Button';
 import InputItem from '../../InputItem/InputItem';
+import Loader from '../../Loader/Loader';
 
 const SignIn: React.FC = () => {
   const [formError, setFormError] = useState<string | AuthErrorsMessage>('');
+  const [formLoad, setFormLoad] = useState<boolean>(false);
   const email = useInput('', Validations.email);
   const password = useInput('', Validations.password);
+
   const dispatch = useDispatch();
+  const router = useNavigate();
 
   const changeHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -28,6 +34,7 @@ const SignIn: React.FC = () => {
 
   const signIn = async (event: FormEvent) => {
     event.preventDefault();
+    setFormLoad(true);
 
     try {
       const res = await AuthService.login(email.value, password.value);
@@ -37,10 +44,14 @@ const SignIn: React.FC = () => {
       dispatch(authSlice.actions.setAuth(true));
       dispatch(authSlice.actions.setOpenModal(false));
       dispatch(userSlice.actions.setUser(res.data.user));
+
+      router('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         setFormError(`${err.response?.data.error}`);
       }
+    } finally {
+      setFormLoad(false);
     }
   };
 
@@ -48,18 +59,21 @@ const SignIn: React.FC = () => {
     <form action='#' className={styles.userForm} onSubmit={signIn}>
       <InputItem
         input={email}
-        placeholder={'E-mail'}
-        errorMessage={`E-mail адрес должен содержать "@" символ. "${email.value}" пропущен символ "@".`}
+        placeholder={AuthFields.email}
+        errorMessage={`${AuthErrorsMessage.invalidEmail} "${email.value}".`}
       />
 
       <InputItem
         input={password}
-        placeholder={'Пароль'}
-        errorMessage={'Пароль должен содержать от 6 до 15 символов!'}
+        placeholder={AuthFields.password}
+        errorMessage={AuthErrorsMessage.invalidPassword}
         isPassword={true}
       />
       {formError && <div className={styles.userForm__formError}>{formError}</div>}
-      <Button text={Auth.signIn} additionalClass={styles.userForm__submit} />
+      <div className={styles.btn__wrapper}>
+        <Button text={Auth.signIn} additionalClass={styles.userForm__submit} />
+        {formLoad && <Loader additionalClass={styles.auth__loader} />}
+      </div>
       <p>
         {ModalAuth.register}
         <a className={styles.userForm__change} href='/' onClick={changeHandler}>
