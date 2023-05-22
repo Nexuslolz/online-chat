@@ -2,9 +2,13 @@ import styles from './Loader.module.scss';
 
 import loader from '../../assets/loader/cardLoader.gif';
 
-const Loader: React.FC = () => {
+interface IBtn {
+  additionalClass?: string;
+}
+
+const Loader: React.FC<IBtn> = (props: IBtn) => {
   return (
-    <div className={styles.loader}>
+    <div className={`${styles.loader} ${props.additionalClass}`}>
       <img className={styles.loaderImg} src={loader} alt='loader' />
     </div>
   );
