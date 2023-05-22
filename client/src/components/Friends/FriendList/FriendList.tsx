@@ -10,6 +10,7 @@ import { API_params, NoPosts } from '../../../constants/pages';
 import useFetch from '../../../hooks/useFetch';
 import { getId } from '../../../store/selectors/userSelector';
 import { IFriendItem } from '../../../types/types';
+import { effectPagination } from '../../../utils/pagination';
 import UserService from '../../API/UserService';
 import Loader from '../../Loader/Loader';
 import FriendItem from '../FriendItem/FriendItem';
@@ -50,7 +51,7 @@ const FriendList: React.FC = () => {
       const allFriendsLength = (await UserService.getAllUsers()).data.length;
 
       if (friends?.length! + 1 >= allFriendsLength) {
-        throw new Error('Больше нечего подгружать');
+        return;
       }
 
       setPaginationError('');
@@ -70,23 +71,7 @@ const FriendList: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isFriendsLoading || !lastElement.current) return;
-
-    if (observer.current) observer.current.disconnect();
-
-    const callback = function (entries: IntersectionObserverEntry[]) {
-      if (entries[0].isIntersecting) {
-        try {
-          changePage();
-        } catch (err) {
-          console.error(`Error has occured, ${err}`);
-        }
-      }
-    };
-
-    observer.current = new IntersectionObserver(callback);
-    observer.current.observe(lastElement.current);
-    setIsPaginationLoad(false);
+    effectPagination(isFriendsLoading, lastElement, observer, changePage, setIsPaginationLoad);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip]);
 
