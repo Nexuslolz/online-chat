@@ -65,3 +65,13 @@ export interface IPostData {
   content: string;
   image: string;
 }
+
+export interface IData {
+  body: string;
+  createdDate: string;
+  likes: ILikes[];
+  _id: string;
+  username: string;
+  image: string;
+  user?: string;
+}
