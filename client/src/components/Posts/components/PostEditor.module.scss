@@ -126,3 +126,11 @@
   gap: 10%;
   position: relative;
 }
+
+.postEditor__text::-webkit-scrollbar {
+  @extend %scrollbar;
+}
+
+.postEditor__text::-webkit-scrollbar-thumb {
+  @extend %scrollthumb;
+}
