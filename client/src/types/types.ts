@@ -57,8 +57,9 @@ export interface IIndexedStr {
 export interface IFriendItem {
   name: string;
   _id: string;
-  body: { city: string };
+  body: { city: string; age: string };
   createdDate: string;
+  birth: string;
 }
 
 export interface IPostData {
