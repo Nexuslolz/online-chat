@@ -10,8 +10,9 @@ import UserService from '../../components/API/UserService';
 import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import UserPostList from '../../components/Posts/UserPostList/UserPostList';
+import Slider from '../../components/UserData/components/Slider/Slider';
 import { UserError } from '../../constants/errors';
-import { MyPage, PeoplePage } from '../../constants/pages';
+import { Friends, MyPage, PeoplePage } from '../../constants/pages';
 import useFetch from '../../hooks/useFetch';
 import { getUserFriends, getId } from '../../store/selectors/userSelector';
 import { IUser } from '../../types/types';
@@ -22,6 +23,8 @@ const FriendPage: React.FC = () => {
   const [friend, setFriend] = useState({} as IUser);
   const location = useLocation();
   const id = location.pathname.replace(/\/friends\//gi, '');
+
+  const [isAnyFriend, setIsAnyFriend] = useState<boolean>(false);
 
   const friendList = useSelector(getUserFriends);
   const userId = useSelector(getId);
@@ -38,7 +41,13 @@ const FriendPage: React.FC = () => {
   useEffect(() => {
     fetchFriend(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
+
+  useEffect(() => {
+    if (friend.friends && friend.friends.length > 0) {
+      setIsAnyFriend(true);
+    }
+  }, [friend]);
 
   if (isFriendLoading) {
     return (
@@ -105,6 +114,11 @@ const FriendPage: React.FC = () => {
         </div>
       </div>
       <div className={styles.friend__posts}>
+        {isAnyFriend ? (
+          <Slider friends={friend.friends} />
+        ) : (
+          <h1 className={styles.userData__friends}>{Friends.noFriends}</h1>
+        )}
         <UserPostList postList={friend.posts!} />
       </div>
     </div>
