@@ -16,4 +16,15 @@ export enum AuthErrorsMessage {
   invalidFields = 'Некорректный ввод',
   notFound = 'Неправильный логин или пароль!',
   isExist = 'Пользователь с этим email уже зарегистрирован!',
+  invalidPassword = 'Пароль должен содержать от 6 до 15 символов!',
+  invalidEmail = 'E-mail адрес должен содержать "@" символ. Пропущен символ "@".',
+  invalidName = 'Имя должно содержать как минимум 3 буквы!',
+  invalidConfirm = 'Пароли должны совпадать!',
+}
+
+export enum AuthFields {
+  name = 'Ваше имя',
+  password = 'Пароль',
+  email = 'E-mail',
+  confirm = 'Подтвердите пароль',
 }

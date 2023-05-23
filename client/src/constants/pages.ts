@@ -39,3 +39,8 @@ export enum NoPosts {
   postUserPage = 'Новостей пока нет',
   usersFriendPage = 'Людей пока нет',
 }
+
+export enum Friends {
+  friends = 'Друзья',
+  noFriends = 'Друзей пока нет',
+}

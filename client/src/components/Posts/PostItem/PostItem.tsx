@@ -11,6 +11,7 @@ import { getIsAuth } from '../../../store/selectors/authSelector';
 import { getId } from '../../../store/selectors/userSelector';
 import { authSlice } from '../../../store/slices/authSlice';
 import { ILikes } from '../../../types/types';
+import { Routes } from '../../../utils/redirect';
 import PostsService from '../../API/PostsService';
 import FavouriteBtn from '../../Icons/FavouriteBtn';
 
@@ -48,16 +49,16 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
     }
   };
 
-  const redirectToProduct = () => {
+  const redirect = () => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth',
     });
     if (userId === props.userId) {
-      router(`/mypage`);
+      router(`${Routes.mypage}`);
     } else {
-      router(`/friends/${props.userId}`);
+      router(`${Routes.friends}/${props.userId}`);
     }
   };
 
@@ -81,7 +82,7 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
 
   return (
     <div id={props.id} className={styles.post}>
-      <div onClick={redirectToProduct} className={styles.postHeader}>
+      <div onClick={redirect} className={styles.postHeader}>
         <div className={styles.postHeader__authorImg}></div>
         <div className={styles.postHeader__authorWrapper}>
           <h2 className={styles.postHeader__authorName}>{props.name}</h2>

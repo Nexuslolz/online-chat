@@ -20,7 +20,7 @@ import LoginModal from '../LoginModal/LoginModal';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useNavigate();
 
   const isAuth = useSelector(getIsAuth);
   const isOpenStore = useSelector(getIsOpen);
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
       dispatch(authSlice.actions.setAuth(false));
       dispatch(userSlice.actions.setUser({} as IUser));
 
-      navigate('/');
+      router('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         console.error(`${err.response?.data.error}`);

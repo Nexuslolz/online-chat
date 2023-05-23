@@ -3,13 +3,14 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ProfileField from './components/ProfileField/ProfileField';
+import Slider from './components/Slider/Slider';
 import styles from './UserData.module.scss';
 
 import image from '../../assets/person-avatar-placeholder.png';
 import { UserError } from '../../constants/errors';
-import { MyPage } from '../../constants/pages';
+import { Friends, MyPage } from '../../constants/pages';
 import useFetch from '../../hooks/useFetch';
-import { getBody, getId, getName, getPosts } from '../../store/selectors/userSelector';
+import { getBody, getId, getName, getPosts, getUserFriends } from '../../store/selectors/userSelector';
 import { userSlice } from '../../store/slices/userSlice';
 import { IIndexedStr } from '../../types/types';
 import { getAge } from '../../utils/getAge';
@@ -35,6 +36,7 @@ const UserData: React.FC = () => {
   const [error, setError] = useState<boolean>(false);
 
   const postList = useSelector(getPosts);
+  const friends = useSelector(getUserFriends);
 
   let [postData, isDataLoading, dataError] = useFetch(async () => {
     await UserService.editUser(userId, userBody);
@@ -170,6 +172,11 @@ const UserData: React.FC = () => {
         />
       </div>
       <div className={styles.myPage__posts}>
+        {friends.length > 0 ? (
+          <Slider friends={friends} />
+        ) : (
+          <h1 className={styles.userData__friends}>{Friends.noFriends}</h1>
+        )}
         <PostEditor />
         <UserPostList postList={postList!} />
       </div>

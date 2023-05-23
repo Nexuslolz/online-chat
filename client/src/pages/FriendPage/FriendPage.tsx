@@ -10,12 +10,13 @@ import UserService from '../../components/API/UserService';
 import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import UserPostList from '../../components/Posts/UserPostList/UserPostList';
+import Slider from '../../components/UserData/components/Slider/Slider';
 import { UserError } from '../../constants/errors';
-import { MyPage, PeoplePage } from '../../constants/pages';
+import { Friends, MyPage, PeoplePage } from '../../constants/pages';
 import useFetch from '../../hooks/useFetch';
 import { getUserFriends, getId } from '../../store/selectors/userSelector';
-import { userSlice } from '../../store/slices/userSlice';
 import { IUser } from '../../types/types';
+import { addFriend, deleteFriend } from '../../utils/friendControlls';
 import { getAge } from '../../utils/getAge';
 
 const FriendPage: React.FC = () => {
@@ -23,24 +24,13 @@ const FriendPage: React.FC = () => {
   const location = useLocation();
   const id = location.pathname.replace(/\/friends\//gi, '');
 
+  const [isAnyFriend, setIsAnyFriend] = useState<boolean>(false);
+
   const friendList = useSelector(getUserFriends);
   const userId = useSelector(getId);
   const [isFriend, setIsFriend] = useState<boolean>(friendList.includes(id) ? true : false);
 
   const dispatch = useDispatch();
-
-  const addFriend = () => {
-    UserService.addFriend(userId, id);
-    dispatch(userSlice.actions.addFriend([...friendList, id]));
-    setIsFriend(true);
-  };
-
-  const deleteFriend = () => {
-    UserService.deleteFriend(userId, id);
-    const deleteFriend = friendList.filter((item) => item !== id);
-    dispatch(userSlice.actions.addFriend(deleteFriend));
-    setIsFriend(false);
-  };
 
   const [fetchFriend, isFriendLoading, isFriendError] = useFetch(async () => {
     const friendList = await UserService.getUser(id);
@@ -51,7 +41,13 @@ const FriendPage: React.FC = () => {
   useEffect(() => {
     fetchFriend(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
+
+  useEffect(() => {
+    if (friend.friends && friend.friends.length > 0) {
+      setIsAnyFriend(true);
+    }
+  }, [friend]);
 
   if (isFriendLoading) {
     return (
@@ -85,7 +81,11 @@ const FriendPage: React.FC = () => {
               <Button
                 additionalClass={isFriend ? styles.friends__btn_remove : styles.friends__btn}
                 text={isFriend ? PeoplePage.removeFriend : PeoplePage.addFriend}
-                onClick={isFriend ? deleteFriend : addFriend}
+                onClick={
+                  isFriend
+                    ? () => deleteFriend(userId, id, friendList, dispatch, setIsFriend)
+                    : () => addFriend(userId, id, friendList, dispatch, setIsFriend)
+                }
               />
             </div>
             <ul className={styles.friendDataField}>
@@ -97,7 +97,7 @@ const FriendPage: React.FC = () => {
               </li>
               <li className={styles.friendDataField__item}>
                 <h3 className={styles.friendData__header}>{`${MyPage.birth}:`}</h3>
-                <span>{friend.body?.age ? friend.body?.age.split('-').reverse().join('.') : MyPage.noValue}</span>
+                <span>{friend.body?.age ? new Date(friend.body?.age).toLocaleDateString() : MyPage.noValue}</span>
               </li>
               <li className={styles.friendDataField__item}>
                 <h3 className={styles.friendData__header}>{`${MyPage.city}:`}</h3>
@@ -114,6 +114,11 @@ const FriendPage: React.FC = () => {
         </div>
       </div>
       <div className={styles.friend__posts}>
+        {isAnyFriend ? (
+          <Slider friends={friend.friends} />
+        ) : (
+          <h1 className={styles.userData__friends}>{Friends.noFriends}</h1>
+        )}
         <UserPostList postList={friend.posts!} />
       </div>
     </div>

@@ -62,6 +62,7 @@ const PostEditor: React.FC = () => {
         setError(false);
       }, 3000);
     }
+
     try {
       formData.content = body;
       await sendPost();

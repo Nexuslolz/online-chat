@@ -6,20 +6,11 @@ import styles from './PostList.module.scss';
 import { UserError } from '../../../constants/errors';
 import { API_params, NoPosts } from '../../../constants/pages';
 import useFetch from '../../../hooks/useFetch';
-import { ILikes } from '../../../types/types';
+import { IData } from '../../../types/types';
+import { effectPagination } from '../../../utils/pagination';
 import PostsService from '../../API/PostsService';
 import Loader from '../../Loader/Loader';
 import PostItem from '../PostItem/PostItem';
-
-interface IData {
-  body: string;
-  createdDate: string;
-  likes: ILikes[];
-  _id: string;
-  username: string;
-  image: string;
-  user?: string;
-}
 
 const PostList: React.FC = () => {
   const [posts, setPosts] = useState<IData[]>();
@@ -30,6 +21,7 @@ const PostList: React.FC = () => {
 
   const [fetchPosts, isPostsLoading, postError] = useFetch(async () => {
     const posts = await PostsService.getPosts(API_params.limit, skip);
+
     setPosts(posts.data);
     setSkip((prev) => (prev += API_params.skip));
   });
@@ -65,23 +57,8 @@ const PostList: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isPostsLoading || !lastElement.current) return;
+    effectPagination(isPostsLoading, lastElement, observer, changePage, setIsPaginationLoad);
 
-    if (observer.current) observer.current.disconnect();
-
-    const callback = function (entries: IntersectionObserverEntry[]) {
-      if (entries[0].isIntersecting) {
-        try {
-          changePage();
-        } catch (err) {
-          console.error(`Error has occured, ${err}`);
-        }
-      }
-    };
-
-    observer.current = new IntersectionObserver(callback);
-    observer.current.observe(lastElement.current);
-    setIsPaginationLoad(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip]);
 

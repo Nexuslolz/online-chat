@@ -57,11 +57,22 @@ export interface IIndexedStr {
 export interface IFriendItem {
   name: string;
   _id: string;
-  body: { city: string };
+  body: { city: string; age: string };
   createdDate: string;
+  birth: string;
 }
 
 export interface IPostData {
   content: string;
   image: string;
+}
+
+export interface IData {
+  body: string;
+  createdDate: string;
+  likes: ILikes[];
+  _id: string;
+  username: string;
+  image: string;
+  user?: string;
 }

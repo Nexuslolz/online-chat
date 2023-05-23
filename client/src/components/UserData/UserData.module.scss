@@ -166,3 +166,7 @@
 .userData__error_visible {
   @extend %error-visible;
 }
+
+.userData__friends {
+  margin: 2em auto;
+}
