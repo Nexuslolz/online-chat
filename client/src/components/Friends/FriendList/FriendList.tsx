@@ -110,6 +110,7 @@ const FriendList: React.FC = () => {
           body={friend.body}
           _id={friend._id}
           createdDate={friend.createdDate}
+          birth=''
         />
       ))}
       <div ref={lastElement} className={styles.observer}></div>
