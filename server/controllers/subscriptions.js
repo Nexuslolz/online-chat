@@ -2,8 +2,6 @@ const Router = require('koa-router')
 const passport = require('koa-passport')
 const User = require('../models/User')
 
-const Subscription = require('../models/Subscription')
-
 const router = new Router().prefix('/subscriptions')
 
 router.put('/add-friend', passport.authenticate('jwt', { session: false }), async (ctx) => {

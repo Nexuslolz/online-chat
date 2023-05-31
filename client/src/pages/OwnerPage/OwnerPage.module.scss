@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.ownerPage {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.myPage__posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+}

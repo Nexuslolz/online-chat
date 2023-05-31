@@ -6,7 +6,7 @@ import { IFriendItem, IIndexedStr } from '../../types/types';
 
 export default class UserService {
   static async editUser(id: string, body: IIndexedStr) {
-    return $api.put('/users/edit-user', { id, body });
+    return $api.put('/users/edit-userк', { id, body });
   }
   static async getUserPosts() {
     return $api.get('/users');

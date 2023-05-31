@@ -18,8 +18,9 @@ const FriendItem: React.FC<IFriendItem> = (props: IFriendItem) => {
   const userId = useSelector(getId);
 
   const router = useNavigate();
-  const [isFriend, setIsFriend] = useState<boolean>(friendList.includes(props._id) ? true : false);
   const dispatch = useDispatch();
+
+  const [isFriend, setIsFriend] = useState<boolean>(friendList.includes(props._id) ? true : false);
 
   return (
     <div id={props._id} className={styles.friendItem}>

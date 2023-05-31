@@ -37,7 +37,10 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
   const giveLike = async () => {
     if (!isAuth) {
       dispatch(authSlice.actions.setOpenModal(true));
+
+      return;
     }
+
     try {
       await PostsService.likePost(props.id);
       setLikes((prev) => prev + 1);
@@ -55,6 +58,7 @@ const PostItem: React.FC<IPost> = (props: IPost) => {
       left: 0,
       behavior: 'smooth',
     });
+
     if (userId === props.userId) {
       router(`${Routes.mypage}`);
     } else {

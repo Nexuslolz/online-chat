@@ -16,7 +16,7 @@ import { authSlice } from '../../../store/slices/authSlice';
 import { userSlice } from '../../../store/slices/userSlice';
 import AuthService from '../../API/AuthService';
 import Button from '../../Button/Button';
-import InputItem from '../../InputItem/InputItem';
+import InputItem, { IInputItemProps } from '../../InputItem/InputItem';
 import Loader from '../../Loader/Loader';
 
 const SignUp: React.FC = () => {
@@ -35,6 +35,27 @@ const SignUp: React.FC = () => {
     event.preventDefault();
     dispatch(authSlice.actions.setHeaderModal(Auth.signIn));
   };
+
+  const formFields: IInputItemProps[] = [
+    { input: name, placeholder: AuthFields.name, errorMessage: AuthErrorsMessage.invalidName },
+    {
+      input: email,
+      placeholder: AuthFields.email,
+      errorMessage: `${AuthErrorsMessage.invalidEmail}. "${email.value}" `,
+    },
+    {
+      input: password,
+      placeholder: AuthFields.password,
+      errorMessage: AuthErrorsMessage.invalidPassword,
+      isPassword: true,
+    },
+    {
+      input: confirmPassword,
+      placeholder: AuthFields.confirm,
+      errorMessage: AuthErrorsMessage.invalidConfirm,
+      isPassword: true,
+    },
+  ];
 
   const signUp = async (event: FormEvent) => {
     event.preventDefault();
@@ -61,28 +82,14 @@ const SignUp: React.FC = () => {
 
   return (
     <form action='#' className={styles.userForm} onSubmit={signUp}>
-      <InputItem input={name} placeholder={AuthFields.name} errorMessage={AuthErrorsMessage.invalidName} />
-
-      <InputItem
-        input={email}
-        placeholder={AuthFields.email}
-        errorMessage={`${AuthErrorsMessage.invalidEmail}. "${email.value}" `}
-      />
-
-      <InputItem
-        input={password}
-        placeholder={AuthFields.password}
-        errorMessage={AuthErrorsMessage.invalidPassword}
-        isPassword={true}
-      />
-
-      <InputItem
-        input={confirmPassword}
-        placeholder={AuthFields.confirm}
-        errorMessage={AuthErrorsMessage.invalidConfirm}
-        isPassword={true}
-      />
-
+      {formFields.map((field) => (
+        <InputItem
+          input={field.input}
+          placeholder={field.placeholder}
+          errorMessage={field.errorMessage}
+          isPassword={field.isPassword}
+        />
+      ))}
       {formError && <div className={styles.userForm__formError}>{formError}</div>}
       <div className={styles.btn__wrapper}>
         <Button text={Auth.signUp} additionalClass={styles.userForm__submit} />

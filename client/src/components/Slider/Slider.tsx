@@ -7,14 +7,14 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import styles from './Slider.module.scss';
 
-import { UserError } from '../../../../constants/errors';
-import { Friends, MyPage } from '../../../../constants/pages';
-import useFetch from '../../../../hooks/useFetch';
+import { UserError } from '../../constants/errors';
+import { Friends, MyPage } from '../../constants/pages';
+import useFetch from '../../hooks/useFetch';
 // import { getId } from '../../../../store/selectors/userSelector';
-import { IFriendItem } from '../../../../types/types';
-import UserService from '../../../API/UserService';
-import FriendCard from '../../../Friends/FriendItem/FriendCard/FriendCard';
-import Loader from '../../../Loader/Loader';
+import { IFriendItem } from '../../types/types';
+import UserService from '../API/UserService';
+import FriendCard from '../Friends/FriendItem/FriendCard/FriendCard';
+import Loader from '../Loader/Loader';
 
 interface ISlider {
   friends: string[];
