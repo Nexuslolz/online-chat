@@ -4,7 +4,7 @@ import styles from './InputItem.module.scss';
 
 import { IUseInput } from '../../types/types';
 
-interface IInputItemProps {
+export interface IInputItemProps {
   input: IUseInput;
   placeholder: string;
   errorMessage: string;

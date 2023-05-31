@@ -12,8 +12,6 @@ interface IPostList {
 const UserPostList: React.FC<IPostList> = (props: IPostList) => {
   const [posts, setPosts] = useState<IUserPost[]>();
 
-  // const postList = useSelector(getPosts);
-
   useEffect(() => {
     const list = props.postList?.slice().reverse();
     setPosts(list);

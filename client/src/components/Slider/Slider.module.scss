@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.scss';
+@import '../../styles/variables.scss';
 
 .caruselWrapper {
   position: relative;
@@ -40,12 +40,12 @@
 
 .prev_slide {
   left: -60px;
-  background-image: url('../../../../assets/arrow_back.svg');
+  background-image: url('../../assets/arrow_back.svg');
 }
 
 .next_slide {
   right: -60px;
-  background-image: url('../../../../assets/arrow_forward.svg');
+  background-image: url('../../assets/arrow_forward.svg');
 }
 
 .friends {

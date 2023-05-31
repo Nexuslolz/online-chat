@@ -4,6 +4,7 @@ export enum Routes {
   mypage = `/mypage`,
   friends = `/friends`,
   messages = `/messages`,
+  error = '*',
 }
 
 export const redirect = (router: NavigateFunction, direct: string, id?: string) => {

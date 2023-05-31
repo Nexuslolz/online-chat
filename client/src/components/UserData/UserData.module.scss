@@ -1,12 +1,5 @@
 @import '../../styles/variables.scss';
 
-.userData__wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-around;
-}
-
 .userData {
   display: flex;
   flex-direction: column;
@@ -61,14 +54,6 @@
 
 .userData__img {
   width: 100%;
-}
-
-.myPage__posts {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 60%;
 }
 
 .userDataField__item {

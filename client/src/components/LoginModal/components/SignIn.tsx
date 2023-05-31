@@ -38,7 +38,6 @@ const SignIn: React.FC = () => {
 
     try {
       const res = await AuthService.login(email.value, password.value);
-      console.log(res);
       localStorage.setItem('token', res.data.accessToken);
 
       dispatch(authSlice.actions.setAuth(true));
@@ -62,7 +61,6 @@ const SignIn: React.FC = () => {
         placeholder={AuthFields.email}
         errorMessage={`${AuthErrorsMessage.invalidEmail} "${email.value}".`}
       />
-
       <InputItem
         input={password}
         placeholder={AuthFields.password}

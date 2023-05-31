@@ -61,6 +61,7 @@ const FriendList: React.FC = () => {
       const pureFriends = response.data.filter((user) => {
         return user._id !== myId;
       });
+
       setSkip((prev) => (prev += API_params.skip));
       setFriends([...friends!, ...pureFriends]);
     } catch (err: unknown) {
