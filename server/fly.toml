@@ -1,0 +1,13 @@
+# fly.toml app configuration file generated for online-bender-chat on 2023-05-11T19:04:48+05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "online-bender-chat"
+primary_region = "bos"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true

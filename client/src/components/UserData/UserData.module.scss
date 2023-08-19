@@ -1,0 +1,157 @@
+@import '../../styles/variables.scss';
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userData__field {
+  margin-bottom: 2em;
+  textarea,
+  p {
+    border-radius: 10px;
+    border: none;
+    padding: 1em 2em;
+    box-shadow: 0 0 10px 2px $bg-dark-color;
+    outline: none;
+    transition: 0.2s;
+    resize: none;
+    width: 426px;
+    height: 148px;
+    background-color: white;
+    margin: 0 auto;
+    font-size: 16px;
+    overflow-y: auto;
+
+    &:focus {
+      box-shadow: 0 0 35px 3px $main-color;
+    }
+  }
+}
+
+.userData__header{
+  margin-bottom: 1em;
+  z-index: 5;
+}
+
+.userData__headerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 2em;
+  gap: 2em;
+}
+
+.userData__imgWrapper {
+  max-width: 300px;
+  max-height: 300px;
+  min-height: 250px;
+  min-width: 250px;
+}
+
+.userData__img {
+  width: 100%;
+}
+
+.userDataField__item {
+  margin-bottom: 6%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    margin-right: 5%;
+  }
+}
+
+
+.userDataField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+
+  &__textArea {
+    border-radius: 10px;
+    border: none;
+    padding: 1em 2em;
+    box-shadow: 0 0 10px 2px $bg-dark-color;
+    outline: none;
+    transition: 0.2s;
+    resize: none;
+    width: 426px;
+    height: 160px;
+    background-color: white;
+    margin: 0 auto;
+    font-size: 16px;
+    overflow-y: auto;
+    margin-bottom: 1.5em;
+
+
+    &:focus {
+      box-shadow: 0 0 35px 3px $main-color;
+    }
+  }
+
+  &__paragraph {
+    border: none;
+    padding: 1em 0.5em;
+    outline: none;
+    transition: 0.2s;
+    width: 426px;
+    background-color: $bg-light-color;
+    margin: 0 auto;
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 1.5em;
+  }
+}
+
+.userDataField__textArea::-webkit-scrollbar {
+  @extend %scrollbar;
+}
+
+.userDataField__textArea::-webkit-scrollbar-thumb {
+  @extend %scrollthumb;
+}
+
+.userData__loaderWrapper {
+  * {
+    max-width: 50px;
+    max-height: 50px;
+    position: absolute;
+    top: -15%;
+  }
+}
+
+.userData__footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10%;
+  position: relative;
+}
+
+.userData__error_hidden {
+  @extend %error-hidden;
+}
+
+.userData__error_visible {
+  @extend %error-visible;
+}
+
+.userData__friends {
+  margin: 2em auto;
+}

@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.friendData__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.userData__friends {
+  margin: 2em auto;
+}
+
+.friend__posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+}
